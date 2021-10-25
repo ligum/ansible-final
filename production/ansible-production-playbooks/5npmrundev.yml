@@ -1,0 +1,11 @@
+- hosts: all
+  tasks:
+  - name: init
+    become: true
+    become_user: vova
+    shell:   npm --prefix  /home/vova/bootcamp    init -y
+  - name: npm install
+    shell:   npm --prefix  /home/vova/bootcamp  install 
+    
+  - name: run app 
+    shell:   npm --prefix  /home/vova/bootcamp  run dev -d

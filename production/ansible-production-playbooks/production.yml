@@ -1,0 +1,55 @@
+---
+ - hosts: all
+   tasks:
+   - name: Clone a github repository
+     git:
+       repo: https://github.com/ligum/bootcamp-app
+       dest: /home/vova/bootcamp
+       clone: yes
+       update: yes
+
+- hosts: all  
+  tasks:
+  - name: Ansible copy file to remote server
+    copy:
+      src: ./.env
+      dest: /home/vova/bootcamp
+
+- hosts: servers
+  tasks:
+  - name: Update system
+    become: true
+    become_user: vova
+    shell:      sudo apt update && sudo apt -y upgrade && sudo apt update
+
+  - name: Add Node.js APT Repository
+    shell:      sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates && curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+  - name: Install Node.js 12
+    shell: sudo apt -y install nodejs
+
+- hosts: 10.0.1.4
+  tasks:
+  - name: init database
+    become: true
+    become_user: vova
+    shell:   npm --prefix  /vova/moshe/bootcamp   run initdb
+
+- hosts: 10.0.1.5
+  tasks:
+  - name: init database
+    become: true
+    become_user: vova
+    shell:   npm --prefix  /vova/moshe/bootcamp   run initdb
+
+- hosts: all
+  tasks:
+  - name: init
+    become: true
+    become_user: vova
+    shell:   npm --prefix  /home/vova/bootcamp    init -y
+  - name: npm install
+    shell:   npm --prefix  /home/vova/bootcamp  install 
+    
+  - name: run app 
+    shell:   npm --prefix  /home/vova/bootcamp  run dev -d
