@@ -3,11 +3,11 @@
   - name: init database
     become: true
     become_user: vova
-    shell:   npm --prefix  /vova/moshe/bootcamp   run initdb
+    shell:   npm --prefix  /home/vova/bootcamp   run initdb
 
 - hosts: 10.0.1.5
   tasks:
   - name: init database
     become: true
     become_user: vova
-    shell:   npm --prefix  /vova/moshe/bootcamp   run initdb
+    shell:   npm --prefix  /home/vova/bootcamp   run initdb
