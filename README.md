@@ -105,3 +105,12 @@ Once the key has been copied, it is best to test it:
 ssh -i ~/.ssh/mykey user@host
 
 The login should now complete without asking for a password. Note, however, that the command might ask for the passphrase you specified for the key
+    
+We will use 3 previous steps for doing this project :
+    
+App : https://github.com/ligum/node-weight-tracker-week3
+    
+Azure : https://github.com/ligum/azure-cloud-week4
+    
+Terraform : https://github.com/ligum/terraform-week5
+    
